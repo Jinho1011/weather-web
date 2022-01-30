@@ -17,6 +17,10 @@ export interface Weather {
   main: string;
 }
 
+export interface StateProps {
+  state: State;
+}
+
 export interface Hourly {
   clouds: number;
   dew_point: number;

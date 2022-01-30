@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { css, cx } from "@emotion/css";
-import { State } from "../interfaces/interface";
+import { StateProps } from "../interfaces/interface";
 
-interface HeaderProps {
-  state: State;
-}
-
-const Header = ({ state }: HeaderProps) => {
+const Header = ({ state }: StateProps) => {
   return (
     <div
       className={css`
