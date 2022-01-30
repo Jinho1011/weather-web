@@ -5,6 +5,7 @@ import { State } from "./interfaces/interface";
 
 import Header from "./modules/header";
 import Today from "./modules/today";
+import Week from "./modules/week";
 
 const App: React.FC = () => {
   const [state, setState] = useState<State>({
@@ -56,6 +57,8 @@ const App: React.FC = () => {
         >
           <Header state={state} />
           <Today state={state} />
+          <Today state={state} />
+          <Week state={state} />
         </div>
       ) : (
         "Ready"
