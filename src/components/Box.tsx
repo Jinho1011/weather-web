@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
-import { StateProps, State, Hourly } from "../interfaces/interface";
+import { StateProps } from "../interfaces/interface";
 
-interface boxProps {
+interface boxProps extends StateProps {
   title: string;
+  icon: any;
   content: any;
 }
 
-type combinedProps = StateProps & boxProps;
-
-const Box = ({ state, title, content }: combinedProps) => {
+const Box = ({ state, icon, title, content }: boxProps) => {
   const LightenDarkenColor = (col: string, amt: number) => {
     var num = parseInt(col.substring(1), 16);
     var r = (num >> 16) + amt;
@@ -23,15 +22,18 @@ const Box = ({ state, title, content }: combinedProps) => {
   const BoxContainer = styled.div`
     width: 100%;
     box-sizing: border-box;
-    padding: 16px 0 16px 16px;
+    padding: 16px 16px 16px 16px;
     border-radius: 20px;
-    background-color: #${LightenDarkenColor(state.backgroundColor, 10)};
+    background-color: #${LightenDarkenColor(state.backgroundColor, 7)};
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14), 0 6px 6px rgba(0, 0, 0, 0.2);
   `;
 
   const BoxTitle = styled.span`
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-family: "Noto Sans KR", sans-serif;
-    color: #d1d1d1;
+    color: #e9e9e9;
     font-weight: 500;
     font-size: 14px;
   `;
@@ -39,7 +41,7 @@ const Box = ({ state, title, content }: combinedProps) => {
   const BoxDivider = styled.div`
     width: 100%;
     padding-bottom: 10px;
-    border-bottom: 1px solid #cfcfcf;
+    border-bottom: 1px solid #e9e9e9;
   `;
 
   const BoxContentContainer = styled.div`
@@ -55,7 +57,10 @@ const Box = ({ state, title, content }: combinedProps) => {
 
   return (
     <BoxContainer>
-      <BoxTitle>{title}</BoxTitle>
+      <BoxTitle>
+        {icon}
+        {title}
+      </BoxTitle>
       <BoxDivider />
       <BoxContentContainer>{content}</BoxContentContainer>
     </BoxContainer>

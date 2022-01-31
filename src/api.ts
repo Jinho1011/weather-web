@@ -1,6 +1,8 @@
 import axios from "axios";
 import Key from "./key";
 import { Coords } from "./interfaces/interface";
+import { CurrentWeather } from "./interfaces/current";
+import { Forecast } from "./interfaces/forecast";
 
 export const getCoords = () => {
   return new Promise<Coords>((resolve, reject) => {
@@ -17,23 +19,40 @@ export const getCoords = () => {
   });
 };
 
-export const getWeather = (lat: number, lng: number) => {
-  const req = axios
-    .get(
-      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&lang=kr&units=metric&appid=${Key}`
-    )
-    .then((res) => res.data);
-  return req;
-};
+export class Api {
+  url: string;
 
-export const getOneCall = (lat: number, lng: number) => {
-  const req = axios
-    .get(
-      `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minutely&lang=kr&units=metric&appid=${Key}`
-    )
-    .then((res) => res.data);
-  return req;
-};
+  constructor(url: string) {
+    this.url = url;
+  }
+
+  async request<Json>(): Promise<Json> {
+    const res = await axios.get(this.url);
+    return (await res.data) as Json;
+  }
+}
+
+export class currentApi extends Api {
+  constructor(coord: Coords) {
+    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${coord.lat}&lon=${coord.lng}&lang=kr&units=metric&appid=${Key}`;
+    super(url);
+  }
+
+  async getData(): Promise<CurrentWeather> {
+    return this.request<CurrentWeather>();
+  }
+}
+
+export class oncallApi extends Api {
+  constructor(coord: Coords) {
+    const url = `http://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lng}&exclude=current,minutely&lang=kr&units=metric&appid=${Key}`;
+    super(url);
+  }
+
+  async getData(): Promise<Forecast> {
+    return this.request<Forecast>();
+  }
+}
 
 export const getCurrentColor = (): string => {
   const data = [
