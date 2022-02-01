@@ -46,9 +46,13 @@ const Box = ({ state, icon, title, content }: boxProps) => {
 
   const BoxContentContainer = styled.div`
     padding-top: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
     display: flex;
-    flex-direction: column;
     gap: 28px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   `;
 
   return (
