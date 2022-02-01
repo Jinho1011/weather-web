@@ -26,7 +26,6 @@ const ProgressBar = ({
   const paddingLeft = (paddingLeftRatio * width) / whole;
 
   if (current !== undefined) {
-    console.log("🚀 ~ file: ProgressBar.tsx ~ line 32 ~ current", current);
     const pointPaddingRatio = current - min;
     const porintPadding = (pointPaddingRatio * width) / whole;
     return (
@@ -43,7 +42,7 @@ const ProgressBar = ({
             width: ${partWidth}px;
             height: 5px;
             border-radius: 10px;
-            background-color: #ebebeb;
+            background: linear-gradient(to right, ${gradientColors?.join(",")});
             margin-left: ${paddingLeft}px;
             overflow: hidden;
             display: flex;
@@ -90,7 +89,7 @@ const ProgressBar = ({
             width: ${partWidth}px;
             height: 5px;
             border-radius: 10px;
-            background-color: #ebebeb;
+            background: linear-gradient(to right, ${gradientColors?.join(",")});
             margin-left: ${paddingLeft}px;
           `}
         ></div>

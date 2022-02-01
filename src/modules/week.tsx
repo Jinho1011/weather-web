@@ -98,15 +98,17 @@ const Content = ({ state }: StateProps) => {
                   range={[weekMinTemp, weekMaxTemp]}
                   min={minTemp}
                   max={maxTemp}
+                  width={100}
                   current={Math.trunc(state.currentWeather.main.temp)}
-                  width={80}
+                  gradientColors={["#dadada", "#EEEEEE"]}
                 />
               ) : (
                 <ProgressBar
                   range={[weekMinTemp, weekMaxTemp]}
                   min={minTemp}
                   max={maxTemp}
-                  width={80}
+                  width={100}
+                  gradientColors={["#dadada", "#EEEEEE"]}
                 />
               )}
               <span
