@@ -9,6 +9,7 @@ interface ProgressBarProps {
   width: number;
   current?: number;
   gradientColors?: string[];
+  backgroundColor?: string;
 }
 
 const ProgressBar = ({
@@ -18,6 +19,7 @@ const ProgressBar = ({
   width,
   current,
   gradientColors,
+  backgroundColor,
 }: ProgressBarProps) => {
   const whole = range[1] - range[0];
   const part = max - min;
@@ -54,9 +56,9 @@ const ProgressBar = ({
             className={css`
               width: 5px;
               height: 5px;
-              padding: 2px;
+              padding: 1.8px;
               border-radius: 10px;
-              background-color: #cecece;
+              background-color: ${backgroundColor};
               margin-left: ${porintPadding}px;
               display: flex;
               justify-content: center;

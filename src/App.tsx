@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { css, cx } from "@emotion/css";
+import styled from "@emotion/styled";
+
 import { getCoords, currentApi, oncallApi, getCurrentColor } from "./api";
 import { State } from "./interfaces/interface";
 import { CurrentWeather } from "./interfaces/current";
@@ -8,15 +10,18 @@ import { Forecast } from "./interfaces/forecast";
 import Header from "./modules/header";
 import Today from "./modules/today";
 import Week from "./modules/week";
+import Uvi from "./modules/uvi";
 
-const LightenDarkenColor = (col: string, amt: number) => {
-  var num = parseInt(col.substring(1), 16);
-  var r = (num >> 16) + amt;
-  var b = ((num >> 8) & 0x00ff) + amt;
-  var g = (num & 0x0000ff) + amt;
-  var newColor = g | (b << 8) | (r << 16);
-  return newColor.toString(16);
-};
+const BoxContainer = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+
+  gap: 10px;
+`;
 
 const App: React.FC = () => {
   const [state, setState] = useState<State>({
@@ -76,7 +81,10 @@ const App: React.FC = () => {
           <Header state={state} />
           <Today state={state} />
           <Week state={state} />
-          <></>
+          <BoxContainer>
+            <Uvi state={state} />
+            <Uvi state={state} />
+          </BoxContainer>
         </div>
       ) : (
         "Ready"
