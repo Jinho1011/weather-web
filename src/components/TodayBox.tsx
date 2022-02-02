@@ -22,7 +22,7 @@ const Box = ({ state, icon, title, content }: boxProps) => {
   const BoxContainer = styled.div`
     width: 100%;
     box-sizing: border-box;
-    padding: 16px 16px 16px 16px;
+    padding: 16px 0px 16px 16px;
     border-radius: 20px;
     background-color: #${LightenDarkenColor(state.backgroundColor, 7)};
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14), 0 6px 6px rgba(0, 0, 0, 0.2);
@@ -45,10 +45,14 @@ const Box = ({ state, icon, title, content }: boxProps) => {
   `;
 
   const BoxContentContainer = styled.div`
-    padding-top: 8px;
+    padding-top: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
     display: flex;
-    flex-direction: column;
     gap: 28px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   `;
 
   return (

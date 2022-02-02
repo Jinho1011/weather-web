@@ -1,25 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { css, cx } from "@emotion/css";
-import { getCoords, getWeather, getOneCall, getCurrentColor } from "./api";
+import styled from "@emotion/styled";
+
+import { getCoords, currentApi, oncallApi, getCurrentColor } from "./api";
 import { State } from "./interfaces/interface";
+import { CurrentWeather } from "./interfaces/current";
+import { Forecast } from "./interfaces/forecast";
 
 import Header from "./modules/header";
 import Today from "./modules/today";
 import Week from "./modules/week";
+import Uvi from "./modules/uvi";
+
+const BoxContainer = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+
+  gap: 10px;
+`;
 
 const App: React.FC = () => {
   const [state, setState] = useState<State>({
     isReady: false,
-    currentWeather: {},
-    forecast: {},
+    currentWeather: {} as CurrentWeather,
+    forecast: {} as Forecast,
     backgroundColor: getCurrentColor(),
   });
 
   useEffect(() => {
     const init = async () => {
       const coord = await getCoords();
-      const currentWeather = await getWeather(coord.lat, coord.lng);
-      const forecast = await getOneCall(coord.lat, coord.lng);
+
+      const currentWeatherApi = new currentApi(coord);
+      const forecastApi = new oncallApi(coord);
+
+      const currentWeather = await currentWeatherApi.getData();
+      const forecast = await forecastApi.getData();
+
       setState((prev: any) => ({
         ...prev,
         currentWeather,
@@ -27,13 +48,15 @@ const App: React.FC = () => {
         isReady: true,
       }));
     };
+    init();
+
     const interval = setInterval(() => {
+      init();
       setState((prev: any) => ({
         ...prev,
         backgroundColor: getCurrentColor(),
       }));
     }, 60000);
-    init();
 
     return () => clearInterval(interval);
   }, []);
@@ -57,8 +80,11 @@ const App: React.FC = () => {
         >
           <Header state={state} />
           <Today state={state} />
-          <Today state={state} />
           <Week state={state} />
+          <BoxContainer>
+            <Uvi state={state} />
+            <Uvi state={state} />
+          </BoxContainer>
         </div>
       ) : (
         "Ready"

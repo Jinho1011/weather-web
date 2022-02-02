@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { FaRegClock } from "react-icons/fa";
 import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
-import { StateProps, Hourly, State } from "../interfaces/interface";
-import Box from "../components/Box";
+import { StateProps } from "../interfaces/interface";
+import { Hourly } from "../interfaces/forecast";
+import Box from "../components/TodayBox";
 
 const TodayContainer = styled.div`
   width: 100%;
@@ -32,7 +34,7 @@ const Content = ({ state }: StateProps) => {
 
           return (
             <div
-              key={index}
+              key={weather.dt}
               className={css`
                 display: flex;
                 flex-direction: column;
@@ -72,7 +74,7 @@ const Content = ({ state }: StateProps) => {
         })}
       <div
         className={css`
-          padding: 4px;
+          padding-right: 6px;
         `}
       />
     </>
@@ -84,6 +86,7 @@ const Today = ({ state }: StateProps) => {
     <TodayContainer>
       <Box
         state={state}
+        icon={<FaRegClock />}
         title={"시간별 일기예보"}
         content={<Content state={state} />}
       />
