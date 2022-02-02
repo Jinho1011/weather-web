@@ -4,7 +4,7 @@ import { css, cx } from "@emotion/css";
 import styled from "@emotion/styled";
 import { StateProps } from "../interfaces/interface";
 import { Hourly } from "../interfaces/forecast";
-import Box from "../components/Box";
+import Box from "../components/TodayBox";
 
 const TodayContainer = styled.div`
   width: 100%;
@@ -72,6 +72,11 @@ const Content = ({ state }: StateProps) => {
             </div>
           );
         })}
+      <div
+        className={css`
+          padding-right: 6px;
+        `}
+      />
     </>
   );
 };

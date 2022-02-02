@@ -70,7 +70,7 @@ const App: React.FC = () => {
             justify-content: center;
             align-items: center;
             height: 100%;
-            background-color: #${LightenDarkenColor(state.backgroundColor, -7)};
+            background-color: ${state.backgroundColor};
           `}
         >
           <Header state={state} />
