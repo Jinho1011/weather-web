@@ -76,6 +76,7 @@ const App: React.FC = () => {
           <Header state={state} />
           <Today state={state} />
           <Week state={state} />
+          <></>
         </div>
       ) : (
         "Ready"
