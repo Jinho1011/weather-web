@@ -26,7 +26,8 @@ const ProgressBar = ({
   const paddingLeft = (paddingLeftRatio * width) / whole;
 
   if (current !== undefined) {
-    const pointPaddingRatio = current - min;
+    const pointPaddingRatio =
+      current - min === part ? current - min - 1 : current - min;
     const porintPadding = (pointPaddingRatio * width) / whole;
     return (
       <div
@@ -56,7 +57,7 @@ const ProgressBar = ({
               padding: 2px;
               border-radius: 10px;
               background-color: #cecece;
-              margin-left: ${porintPadding - 4.5}px;
+              margin-left: ${porintPadding}px;
               display: flex;
               justify-content: center;
               align-items: center;
