@@ -45,7 +45,7 @@ const Box = ({ state, icon, title, content }: boxProps) => {
   `;
 
   const BoxContentContainer = styled.div`
-    padding-top: 20px;
+    padding-top: 8px;
     display: flex;
     flex-direction: column;
     gap: 28px;
@@ -57,7 +57,6 @@ const Box = ({ state, icon, title, content }: boxProps) => {
         {icon}
         {title}
       </BoxTitle>
-      <BoxDivider />
       <BoxContentContainer>{content}</BoxContentContainer>
     </BoxContainer>
   );

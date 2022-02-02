@@ -61,7 +61,6 @@ const Box = ({ state, icon, title, content }: boxProps) => {
         {icon}
         {title}
       </BoxTitle>
-      <BoxDivider />
       <BoxContentContainer>{content}</BoxContentContainer>
     </BoxContainer>
   );
