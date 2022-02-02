@@ -72,6 +72,11 @@ const Content = ({ state }: StateProps) => {
             </div>
           );
         })}
+      <div
+        className={css`
+          padding-right: 6px;
+        `}
+      />
     </>
   );
 };
